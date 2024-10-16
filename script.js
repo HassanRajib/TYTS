@@ -1,4 +1,4 @@
-const quoteApiUrl = "https://api.quotable.io/quotes/random?minLength=80&maxLength=140"
+const quoteApiUrl = "https://api.quotable.io/random?minLength=80&maxLength=140"
 const quoteSection = document.getElementById("quote");
 const userInput = document.getElementById("quote-input");
 
@@ -24,7 +24,7 @@ userInput.addEventListener("input", () => {
 
     let userInputChars = userInput.value.split("");
     quoteChars.forEach((char, index) => {
-        if (char.innerHTML == userInputChars[index]){
+        if (char.innerText == userInputChars[index]){
             char.classList.add("success")
         }
         else if (userInputChars[index] == null) {
@@ -38,7 +38,7 @@ userInput.addEventListener("input", () => {
                 mistakes++;
                 char.classList.add("fail");
             }
-            document.getElementById("mistakes").innerHTML = mistakes;
+            document.getElementById("mistakes").innerText = mistakes;
         }
         let check = quoteChars.every((element) => {
             return element.classList.contains("success");
@@ -64,10 +64,10 @@ const timeReduce = () => {
 };
 
 const displayResult = () => {
-    document.querySelector(".result").computedStyleMap.display = "block";
+    document.querySelector(".result").style.display = "block";
     clearInterval(timer)
     document.getElementById("stop").style.display = "none";
-    userInput.disable = true;
+    userInput.disabled = true;
     let timeTaken = 1;
     if (time != 0) {
         timeTaken = (60 - time) / 100;
@@ -79,16 +79,16 @@ const displayResult = () => {
 const startTest = () => {
     mistakes = 0;
     timer = "";
-    userInput.disable = false;
-    timeReduce()
-    document.getElementById("start").style.display = "none"
-    document.getElementById("stop").style.display = "block"
+    userInput.disabled = false;
+    timeReduce();
+    document.getElementById("start").style.display = "none";
+    document.getElementById("stop").style.display = "block";
 }
 
 window.onload = () => {
-    userInput.value = ""
-    document.getElementById("start").style.display = "block"
-    document.getElementById("stop").style.display = "none"
-    userInput.disable = true;
+    userInput.value = "";
+    document.getElementById("start").style.display = "block";
+    document.getElementById("stop").style.display = "none";
+    userInput.disabled = true;
     renderNewQuote();
 }
